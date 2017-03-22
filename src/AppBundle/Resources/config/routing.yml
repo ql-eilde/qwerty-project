@@ -1,0 +1,49 @@
+home:
+    path: /
+    defaults: { _controller: AppBundle:Home:index }
+
+buy:
+    path: /buy
+    defaults: { _controller: AppBundle:Buy:index }
+
+buy_view:
+    path: /buy-{slug}
+    defaults: { _controller: AppBundle:Buy:view }
+    requirements:
+        slug: '[a-z0-9\-]+'
+
+cart:
+    path: /cart
+    defaults: { _controller: AppBundle:Cart:view }
+
+cart_add:
+    path: /cart/add/{id}
+    defaults: { _controller: AppBundle:Cart:add }
+
+cart_delete:
+    path: /cart/delete/{id}
+    defaults: { _controller: AppBundle:Cart:delete }
+
+cart_clear:
+    path: /cart/clear
+    defaults: { _controller: AppBundle:Cart:clear }
+
+sell:
+    path: /sell
+    defaults: { _controller: AppBundle:Sell:index }
+
+sell_add:
+    path: /sell/add
+    defaults: { _controller: AppBundle:Sell:add }
+
+sell_iban:
+    path: /sell/iban
+    defaults: { _controller: AppBundle:Sell:iban }
+
+sell_recap:
+    path: /sell/recap
+    defaults: { _controller: AppBundle:Sell:recap }
+
+sell_validate:
+    path: /sell/validate
+    defaults: { _controller: AppBundle:Sell:validate }

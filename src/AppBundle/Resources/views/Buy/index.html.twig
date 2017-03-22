@@ -1,0 +1,12 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}Buy - {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    <h1>Buy Page</h1>
+    <ul>
+        {% for product in products %}
+            <li><a href="{{ path('buy_view', {'slug': product.slug}) }}">{{ product.name }} - {{ product.price }} €</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
