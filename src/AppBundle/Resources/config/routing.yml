@@ -28,6 +28,18 @@ cart_clear:
     path: /cart/clear
     defaults: { _controller: AppBundle:Cart:clear }
 
+checkout:
+    path: /checkout
+    defaults: { _controller: AppBundle:Checkout:view }
+
+checkout_pay:
+    path: /checkout/pay
+    defaults: { _controller: AppBundle:Checkout:pay }
+
+checkout_done:
+    path: /checkout/done
+    defaults: { _controller: AppBundle:Checkout:done }
+
 sell:
     path: /sell
     defaults: { _controller: AppBundle:Sell:index }

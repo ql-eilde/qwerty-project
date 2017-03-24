@@ -6,9 +6,9 @@ use AppBundle\Entity\QIban;
 use AppBundle\Entity\QProduct;
 use AppBundle\Form\IbanType;
 use AppBundle\Form\ProductType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class SellController extends Controller
 {

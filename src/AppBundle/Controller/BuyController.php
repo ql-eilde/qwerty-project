@@ -7,6 +7,8 @@ use AppBundle\Entity\QProduct;
 
 class BuyController extends Controller
 {
+    //TODO : Add validations (product exist ...)
+
     public function indexAction()
     {
         $products = $this->getDoctrine()->getManager()->getRepository('AppBundle:QProduct')->findAll();

@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CartController extends Controller
 {
+    //TODO : Add validations before any process
+
     public function addAction(Request $request, QProduct $product)
     {
         $session = $request->getSession();

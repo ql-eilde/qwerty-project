@@ -90,3 +90,17 @@ stof_doctrine_extensions:
         default:
             timestampable: true
             sluggable: true
+
+payum:
+    security:
+        token_storage:
+            AppBundle\Entity\PaymentToken: { doctrine: orm }
+    storages:
+        AppBundle\Entity\Payment: { doctrine: orm }
+    gateways:
+        offline:
+            factory: offline
+        mygateway:
+            factory: stripe_checkout
+            publishable_key: '%stripe_publishable_key%'
+            secret_key:      '%stripe_secret_key%'

@@ -1,0 +1,17 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}Checkout - {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% for product in cart %}
+        <ul>
+            <li>{{ product.name }}</li>
+            <li>{{ product.description }}</li>
+            <li>{{ product.price }} €</li>
+        </ul>
+    {% endfor %}
+    <p>Total : {{ total_price }} €</p>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}
