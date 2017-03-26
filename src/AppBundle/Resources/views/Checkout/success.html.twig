@@ -1,0 +1,9 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}Checkout Success - {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    <p>Votre paiement à été effectué avec succès.</p>
+    <p><a href="#" class="btn btn-info">Voir mes commandes</a></p>
+    <p><a href="{{ path('home') }}" class="btn btn-primary">Retourner sur la page d'accueil</a></p>
+{% endblock %}

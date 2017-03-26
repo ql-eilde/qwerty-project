@@ -1,0 +1,29 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}Checkout - {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% for product in cart %}
+        <ul>
+            <li>{{ product.name }}</li>
+            <li>{{ product.description }}</li>
+            <li>{{ product.price }} €</li>
+        </ul>
+    {% endfor %}
+    <p>Total : {{ amount }} €</p>
+    <form action="{{ path('checkout') }}" method="POST">
+        <script
+                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="{{ pk_key }}"
+                data-amount="{{ amount*100 }}"
+                data-name="Qwerty"
+                data-description="Paiement Stripe - Qwerty"
+                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                data-locale="fr"
+                data-currency="eur"
+                data-billing-address="true"
+                data-shipping-address="true"
+                data-email="{{ user.email }}">
+        </script>
+    </form>
+{% endblock %}

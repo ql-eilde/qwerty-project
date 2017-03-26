@@ -1,0 +1,8 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}Checkout Failure - {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    <p>Votre paiement à été refusé.</p>
+    <p><a href="{{ path('home') }}" class="btn btn-primary">Retourner sur la page d'accueil</a></p>
+{% endblock %}

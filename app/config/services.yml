@@ -1,7 +1,8 @@
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/service_container.html
 parameters:
-#    parameter_name: value
+    sk_key: "%stripe_secret_key%"
+    pk_key: "%stripe_publishable_key%"
 
 services:
 #    service_name:
