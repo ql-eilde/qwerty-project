@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\QOrder;
 use Stripe\Stripe;
 use Stripe\Charge;
 use Stripe\Error\Card;
@@ -18,12 +19,21 @@ class CheckoutController extends Controller
     public function payAction(Request $request)
     {
         //TODO : Put this in a service
+
+        $session = $request->getSession();
+
         if($request->isMethod('POST'))
         {
             $user = $this->getUser();
-            $user->setStreet($_POST['stripeShippingAddressLine1']);
-            $user->setCity($_POST['stripeShippingAddressCity']);
-            $user->setPostcode($_POST['stripeShippingAddressZip']);
+            $name = explode(" ", $_POST['stripeBillingName']);
+            $user->setFirstName($name[0]);
+            $user->setLastName($name[1]);
+            $user->setShippingStreet($_POST['stripeShippingAddressLine1']);
+            $user->setShippingCity($_POST['stripeShippingAddressCity']);
+            $user->setShippingPostcode($_POST['stripeShippingAddressZip']);
+            $user->setBillingStreet($_POST['stripeBillingAddressLine1']);
+            $user->setBillingCity($_POST['stripeBillingAddressCity']);
+            $user->setBillingPostcode($_POST['stripeBillingAddressZip']);
             $userManager = $this->get('fos_user.user_manager');
             $userManager->updateUser($user);
 
@@ -35,12 +45,37 @@ class CheckoutController extends Controller
             ));
             try {
                 Charge::create(array(
-                    "amount" => $this->container->get('app.cart')->getTotalPriceForCart($request->getSession()->get('cart')) * 100,
+                    "amount" => $this->container->get('app.cart')->getTotalPriceForCart($session->get('cart')) * 100,
                     "currency" => "eur",
                     "description" => "Paiement Stripe - Qwerty",
                     'customer' => $customer->id,
                 ));
-                $request->getSession()->clear('cart');
+
+                //Create Order(s)
+                $manager = $this->getDoctrine()->getManager();
+
+                foreach($session->get('cart') as $item)
+                {
+                    $order = new QOrder();
+                    $product = $manager->merge($item);
+                    $order->setProduct($product);
+                    $order->setCustomer($this->getUser());
+                    $order->setShippingState('shipping pending');
+                    $manager->persist($order);
+                }
+
+                //Set publishable to false for product order
+                foreach($session->get('cart') as $var)
+                {
+                    $prod = $manager->merge($var);
+                    $prod->setPublishable(false);
+                    $manager->persist($prod);
+                }
+                $manager->flush();
+
+                //Clearing the cart
+                $session->clear('cart');
+
                 return $this->render('AppBundle:Checkout:success.html.twig');
             } catch(Card $e) {
                 $body = $e->getJsonBody();
@@ -53,7 +88,7 @@ class CheckoutController extends Controller
         return $this->render('AppBundle:Checkout:pay.html.twig', array(
             'cart' => $request->getSession()->get('cart'),
             'user' => $this->getUser(),
-            'amount' => $this->container->get('app.cart')->getTotalPriceForCart($request->getSession()->get('cart')),
+            'amount' => $this->container->get('app.cart')->getTotalPriceForCart($session->get('cart')),
         ));
     }
 }

@@ -72,6 +72,18 @@ class QProduct
     private $slug;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="publishable", type="boolean", options={"default": true})
+     */
+    private $publishable;
+
+    public function __construct()
+    {
+        $this->setPublishable(true);
+    }
+
+    /**
      * Get id
      *
      * @return int
@@ -247,5 +259,29 @@ class QProduct
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set publishable
+     *
+     * @param boolean $publishable
+     *
+     * @return QProduct
+     */
+    public function setPublishable($publishable)
+    {
+        $this->publishable = $publishable;
+
+        return $this;
+    }
+
+    /**
+     * Get publishable
+     *
+     * @return boolean
+     */
+    public function getPublishable()
+    {
+        return $this->publishable;
     }
 }

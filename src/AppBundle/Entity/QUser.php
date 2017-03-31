@@ -34,19 +34,34 @@ class QUser extends BaseUser
     protected $phone_number;
 
     /**
-     * @ORM\Column(name="street", type="string", length=255, nullable=true)
+     * @ORM\Column(name="shipping_street", type="string", length=255, nullable=true)
      */
-    protected $street;
+    protected $shippingStreet;
 
     /**
-     * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     * @ORM\Column(name="shipping_city", type="string", length=255, nullable=true)
      */
-    protected $city;
+    protected $shippingCity;
 
     /**
-     * @ORM\Column(name="postcode", type="string", length=255, nullable=true)
+     * @ORM\Column(name="shipping_postcode", type="string", length=255, nullable=true)
      */
-    protected $postcode;
+    protected $shipping_postcode;
+
+    /**
+     * @ORM\Column(name="billing_street", type="string", length=255, nullable=true)
+     */
+    protected $billingStreet;
+
+    /**
+     * @ORM\Column(name="billing_city", type="string", length=255, nullable=true)
+     */
+    protected $billingCity;
+
+    /**
+     * @ORM\Column(name="billing_postcode", type="string", length=255, nullable=true)
+     */
+    protected $billing_postcode;
 
     /**
      * @ORM\OneToOne(targetEntity="QIban")
@@ -125,78 +140,6 @@ class QUser extends BaseUser
         return $this->phone_number;
     }
 
-    /**
-     * Set street
-     *
-     * @param string $street
-     *
-     * @return QUser
-     */
-    public function setStreet($street)
-    {
-        $this->street = $street;
-
-        return $this;
-    }
-
-    /**
-     * Get street
-     *
-     * @return string
-     */
-    public function getStreet()
-    {
-        return $this->street;
-    }
-
-    /**
-     * Set city
-     *
-     * @param string $city
-     *
-     * @return QUser
-     */
-    public function setCity($city)
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    /**
-     * Get city
-     *
-     * @return string
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-    /**
-     * Set postcode
-     *
-     * @param string $postcode
-     *
-     * @return QUser
-     */
-    public function setPostcode($postcode)
-    {
-        $this->postcode = $postcode;
-
-        return $this;
-    }
-
-    /**
-     * Get postcode
-     *
-     * @return string
-     */
-    public function getPostcode()
-    {
-        return $this->postcode;
-    }
-
     public function setEmail($email)
     {
         parent::setEmail($email);
@@ -225,5 +168,149 @@ class QUser extends BaseUser
     public function getIban()
     {
         return $this->iban;
+    }
+
+    /**
+     * Set shippingStreet
+     *
+     * @param string $shippingStreet
+     *
+     * @return QUser
+     */
+    public function setShippingStreet($shippingStreet)
+    {
+        $this->shippingStreet = $shippingStreet;
+
+        return $this;
+    }
+
+    /**
+     * Get shippingStreet
+     *
+     * @return string
+     */
+    public function getShippingStreet()
+    {
+        return $this->shippingStreet;
+    }
+
+    /**
+     * Set shippingCity
+     *
+     * @param string $shippingCity
+     *
+     * @return QUser
+     */
+    public function setShippingCity($shippingCity)
+    {
+        $this->shippingCity = $shippingCity;
+
+        return $this;
+    }
+
+    /**
+     * Get shippingCity
+     *
+     * @return string
+     */
+    public function getShippingCity()
+    {
+        return $this->shippingCity;
+    }
+
+    /**
+     * Set shippingPostcode
+     *
+     * @param string $shippingPostcode
+     *
+     * @return QUser
+     */
+    public function setShippingPostcode($shippingPostcode)
+    {
+        $this->shipping_postcode = $shippingPostcode;
+
+        return $this;
+    }
+
+    /**
+     * Get shippingPostcode
+     *
+     * @return string
+     */
+    public function getShippingPostcode()
+    {
+        return $this->shipping_postcode;
+    }
+
+    /**
+     * Set billingStreet
+     *
+     * @param string $billingStreet
+     *
+     * @return QUser
+     */
+    public function setBillingStreet($billingStreet)
+    {
+        $this->billingStreet = $billingStreet;
+
+        return $this;
+    }
+
+    /**
+     * Get billingStreet
+     *
+     * @return string
+     */
+    public function getBillingStreet()
+    {
+        return $this->billingStreet;
+    }
+
+    /**
+     * Set billingCity
+     *
+     * @param string $billingCity
+     *
+     * @return QUser
+     */
+    public function setBillingCity($billingCity)
+    {
+        $this->billingCity = $billingCity;
+
+        return $this;
+    }
+
+    /**
+     * Get billingCity
+     *
+     * @return string
+     */
+    public function getBillingCity()
+    {
+        return $this->billingCity;
+    }
+
+    /**
+     * Set billingPostcode
+     *
+     * @param string $billingPostcode
+     *
+     * @return QUser
+     */
+    public function setBillingPostcode($billingPostcode)
+    {
+        $this->billing_postcode = $billingPostcode;
+
+        return $this;
+    }
+
+    /**
+     * Get billingPostcode
+     *
+     * @return string
+     */
+    public function getBillingPostcode()
+    {
+        return $this->billing_postcode;
     }
 }

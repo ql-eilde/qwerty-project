@@ -11,7 +11,7 @@ class BuyController extends Controller
 
     public function indexAction()
     {
-        $products = $this->getDoctrine()->getManager()->getRepository('AppBundle:QProduct')->findAll();
+        $products = $this->getDoctrine()->getManager()->getRepository('AppBundle:QProduct')->findByPublishable(1);
 
         return $this->render('AppBundle:Buy:index.html.twig', array(
             'products' => $products,

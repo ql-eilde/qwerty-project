@@ -24,19 +24,21 @@ class QOrder
     /**
      * @var string
      *
-     * @ORM\Column(name="state", type="string", length=255)
+     * @ORM\Column(name="shipping_state", type="string", length=255)
      */
-    private $state;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="QMainOrder")
-     */
-    private $mainOrder;
+    private $shippingState;
 
     /**
      * @ORM\OneToOne(targetEntity="QProduct")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $product;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="QUser")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $customer;
 
     /**
      * Get id
@@ -46,54 +48,6 @@ class QOrder
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set state
-     *
-     * @param string $state
-     *
-     * @return QOrder
-     */
-    public function setState($state)
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-    /**
-     * Get state
-     *
-     * @return string
-     */
-    public function getState()
-    {
-        return $this->state;
-    }
-
-    /**
-     * Set mainOrder
-     *
-     * @param \AppBundle\Entity\QMainOrder $mainOrder
-     *
-     * @return QOrder
-     */
-    public function setMainOrder(\AppBundle\Entity\QMainOrder $mainOrder)
-    {
-        $this->mainOrder = $mainOrder;
-
-        return $this;
-    }
-
-    /**
-     * Get mainOrder
-     *
-     * @return \AppBundle\Entity\QMainOrder
-     */
-    public function getMainOrder()
-    {
-        return $this->mainOrder;
     }
 
     /**
@@ -118,5 +72,53 @@ class QOrder
     public function getProduct()
     {
         return $this->product;
+    }
+
+    /**
+     * Set shippingState
+     *
+     * @param string $shippingState
+     *
+     * @return QOrder
+     */
+    public function setShippingState($shippingState)
+    {
+        $this->shippingState = $shippingState;
+
+        return $this;
+    }
+
+    /**
+     * Get shippingState
+     *
+     * @return string
+     */
+    public function getShippingState()
+    {
+        return $this->shippingState;
+    }
+
+    /**
+     * Set customer
+     *
+     * @param \AppBundle\Entity\QUser $customer
+     *
+     * @return QOrder
+     */
+    public function setCustomer(\AppBundle\Entity\QUser $customer)
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    /**
+     * Get customer
+     *
+     * @return \AppBundle\Entity\QUser
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
     }
 }
